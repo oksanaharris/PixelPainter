@@ -1,0 +1,7 @@
+.canvasCells {
+
+  width:90px;
+  height:90px;
+  border: solid 1px black;
+  display:inline-block;
+}
