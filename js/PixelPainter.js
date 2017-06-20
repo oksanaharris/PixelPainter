@@ -10,16 +10,12 @@ canvasDiv.id='pp-canvas';
 
 pixelPainter.appendChild(canvasDiv);
 
-
-
-
-
 var clickHappenYet = false;
 
 var selectedColor = 'green';
 
 
-function grid(height, width, classStr, parent){
+function canvasGrid(height, width, classStr, parent){
  for(i=1; i<=height; i++){
     for(j=1; j<=width; j++){
       var newCell=document.createElement('div');
@@ -33,9 +29,9 @@ function grid(height, width, classStr, parent){
     var lineBreak=document.createElement('br');
     parent.appendChild(lineBreak);
  }
-
 }
-grid(10,10, 'canvasCells', canvasDiv);
+
+canvasGrid(25, 25, 'canvasCells', canvasDiv);
 
 function fillColorOnHover (e){
   if(clickHappenYet === true){
@@ -51,9 +47,7 @@ function fillColorOnMouseUp (e){
 
 function fillColorOnClick (e){
   clickHappenYet = true;
-  var cellId = e.target.id;
-  var cell = document.getElementById(cellId);
-  cell.style.backgroundColor = selectedColor;
+  e.target.style.backgroundColor = selectedColor;
 }
 
 const toolBox=document.createElement("div");
@@ -66,12 +60,50 @@ colorPalette.id="colorPalette";
 
 const clear = document.createElement("button");
 const eraser = document.createElement("button");
+eraser.addEventListener("click", eraserFunc);
+clear.addEventListener("click", clearFunc);
 
 toolBox.appendChild(clear);
 toolBox.appendChild(eraser);
 
 clear.innerHTML="clear";
 eraser.innerHTML="eraser";
-// toolBox.innerHTML="toolBox";
 
-grid(5,2, 'canvasCells', colorPalette);
+function paletteGrid(height, width, classStr, parent){
+ for(i=1; i<=height; i++){
+    for(j=1; j<=width; j++){
+      var newCell=document.createElement('div');
+      newCell.id = 'color' + i + j;
+      newCell.className=classStr;
+      newCell.addEventListener('click', pickColor);
+      parent.appendChild(newCell);
+    }
+    var lineBreak=document.createElement('br');
+    parent.appendChild(lineBreak);
+ }
+}
+
+paletteGrid (2,5, 'paletteCells', colorPalette);
+
+var chosenColors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'purple', 'violet', 'black', 'white'];
+
+var colorPaletteEls = document.getElementsByClassName('paletteCells');
+
+for (var k = 0; k < colorPaletteEls.length; k++){
+  colorPaletteEls[k].style.backgroundColor = chosenColors[k];
+}
+
+function pickColor (e) {
+  selectedColor = e.target.style.backgroundColor;
+}
+
+function eraserFunc (e) {
+  selectedColor = 'white';
+}
+
+function clearFunc (e) {
+  var allCanvasCells = document.getElementsByClassName('canvasCells');
+  for (var i = 0; i < allCanvasCells.length; i++){
+    allCanvasCells[i].style.backgroundColor = 'white';
+  }
+}
