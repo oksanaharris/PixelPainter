@@ -3,18 +3,23 @@
 let width;
 let height=4;
 
+
+var pixelPainter=document.getElementById("pixelPainter");
 let canvasDiv=document.createElement("div");
 canvasDiv.id='pp-canvas';
 
-var pixelPainter=document.getElementById("pixelPainter");
 pixelPainter.appendChild(canvasDiv);
+
+
+
+
 
 var clickHappenYet = false;
 
 var selectedColor = 'green';
 
 
-function grid(height, width, classStr){
+function grid(height, width, classStr, parent){
  for(i=1; i<=height; i++){
     for(j=1; j<=width; j++){
       var newCell=document.createElement('div');
@@ -23,14 +28,14 @@ function grid(height, width, classStr){
       newCell.addEventListener('mousedown', fillColorOnClick);
       newCell.addEventListener('mouseenter', fillColorOnHover);
       newCell.addEventListener('mouseup', fillColorOnMouseUp);
-      canvasDiv.appendChild(newCell);
+      parent.appendChild(newCell);
     }
     var lineBreak=document.createElement('br');
-    canvasDiv.appendChild(lineBreak);
+    parent.appendChild(lineBreak);
  }
 
 }
-grid(10,10, 'canvasCells');
+grid(10,10, 'canvasCells', canvasDiv);
 
 function fillColorOnHover (e){
   if(clickHappenYet === true){
@@ -50,3 +55,23 @@ function fillColorOnClick (e){
   var cell = document.getElementById(cellId);
   cell.style.backgroundColor = selectedColor;
 }
+
+const toolBox=document.createElement("div");
+const colorPalette=document.createElement("div");
+toolBox.appendChild(colorPalette);
+
+pixelPainter.appendChild(toolBox);
+toolBox.id="toolBox";
+colorPalette.id="colorPalette";
+
+const clear = document.createElement("button");
+const eraser = document.createElement("button");
+
+toolBox.appendChild(clear);
+toolBox.appendChild(eraser);
+
+clear.innerHTML="clear";
+eraser.innerHTML="eraser";
+// toolBox.innerHTML="toolBox";
+
+grid(5,2, 'canvasCells', colorPalette);
