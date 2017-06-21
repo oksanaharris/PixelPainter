@@ -6,6 +6,7 @@ window.PixelPainter = function(height, width){
   let canvasDiv=document.createElement("div");
   canvasDiv.id='pp-canvas';
 
+
   main.appendChild(canvasDiv);
 
   var clickHappenYet = false;
@@ -39,7 +40,7 @@ window.PixelPainter = function(height, width){
     clickHappenYet = true;
 
     switch (toolPicked){
-      case 'fill': 
+      case 'fill':
         colorToFill=e.target.style.backgroundColor;
         var allCanvasCells = document.getElementsByClassName('canvasCells');
         for (let i = 0; i < allCanvasCells.length; i++){
@@ -49,7 +50,7 @@ window.PixelPainter = function(height, width){
         }
         fillClicked = false;
         break;
-      
+
       case 'eraser':
         e.target.style.backgroundColor = 'white';
         break;
@@ -202,7 +203,7 @@ window.PixelPainter = function(height, width){
   }
 
   // function activateFill () {
-    
+
   // }
 
   // function activateBrush (e) {

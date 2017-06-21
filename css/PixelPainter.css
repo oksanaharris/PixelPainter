@@ -96,3 +96,7 @@ button {
   /*background-color: blue;*/
   /*border-style: outset;*/
 }
+
+.text{
+  cursor: text;
+}
