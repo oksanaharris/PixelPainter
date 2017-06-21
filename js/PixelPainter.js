@@ -14,6 +14,8 @@ window.PixelPainter = function(height, width){
 
   var colorToFill;
 
+  var toolPicked;
+
   function canvasGrid(gridHeight, gridWidth, classStr, parent){
    for(i=1; i<=gridHeight; i++){
       for(j=1; j<=gridWidth; j++){
@@ -35,9 +37,17 @@ window.PixelPainter = function(height, width){
 
   function fillColorOnHover (e){
     if(clickHappenYet === true){
-      var cellId = e.target.id;
-      var cell = document.getElementById(cellId);
-      cell.style.backgroundColor = selectedColor;
+      switch (toolPicked){
+        case 'eraser':
+          e.target.style.backgroundColor = 'white';
+          break;
+        case 'brush':
+          e.target.style.backgroundColor = selectedColor;
+          break;
+        default:
+          e.target.style.backgroundColor = selectedColor;
+          break;
+        }
     }
   }
 
@@ -46,20 +56,33 @@ window.PixelPainter = function(height, width){
   }
 
   function fillColorOnClick (e){
-    if(fillClicked === true){
-      colorToFill=e.target.style.backgroundColor;
+    clickHappenYet = true;
 
-      var allCanvasCells = document.getElementsByClassName('canvasCells');
-      for (let i = 0; i < allCanvasCells.length; i++){
-        if(allCanvasCells[i].style.backgroundColor === colorToFill){
-          allCanvasCells[i].style.backgroundColor = selectedColor;
+    switch (toolPicked){
+      case 'fill': 
+        colorToFill=e.target.style.backgroundColor;
+        var allCanvasCells = document.getElementsByClassName('canvasCells');
+        for (let i = 0; i < allCanvasCells.length; i++){
+          if(allCanvasCells[i].style.backgroundColor === colorToFill){
+            allCanvasCells[i].style.backgroundColor = selectedColor;
+          }
         }
-      }
-      fillClicked = false;
-    }else{
-      clickHappenYet = true;
-      e.target.style.backgroundColor = selectedColor;
+        fillClicked = false;
+        break;
+      
+      case 'eraser':
+        e.target.style.backgroundColor = 'white';
+        break;
 
+      case 'brush':
+        clickHappenYet = true;
+        e.target.style.backgroundColor = selectedColor;
+        break;
+
+      default:
+        clickHappenYet = true;
+        e.target.style.backgroundColor = selectedColor;
+        break;
     }
 
   }
@@ -110,7 +133,7 @@ window.PixelPainter = function(height, width){
   }
 
   function eraserFunc (e) {
-    selectedColor = 'white';
+    toolPicked = 'eraser';
   }
 
   function clearFunc (e) {
@@ -122,7 +145,7 @@ window.PixelPainter = function(height, width){
 
   const brushButton = document.createElement('div');
   brushButton.className = 'toolBoxButton';
-  // brushButton.addEventListener('click', activateBrush);
+  brushButton.addEventListener('click', activateBrush);
   toolBox.appendChild(brushButton);
 
   const brushImg = document.createElement('img');
@@ -151,19 +174,13 @@ window.PixelPainter = function(height, width){
   eraserButton.appendChild(eraserImg);
 
 
-  var fillClicked=false;
-
   function activateFill () {
-    fillClicked=true;
-
+    toolPicked = 'fill';
   }
 
-
-
-
-
-
-
+  function activateBrush () {
+    toolPicked = 'brush';
+  }
 };
 
 PixelPainter(25,25);
