@@ -12,12 +12,15 @@ window.PixelPainter = function(height, width){
 
   var selectedColor = 'green';
 
+  var colorToFill;
+
   function canvasGrid(gridHeight, gridWidth, classStr, parent){
    for(i=1; i<=gridHeight; i++){
       for(j=1; j<=gridWidth; j++){
         var newCell=document.createElement('div');
         newCell.id = 'cell' + i+'-' +j;
         newCell.className=classStr;
+        newCell.style.backgroundColor = 'white';
         newCell.addEventListener('mousedown', fillColorOnClick);
         newCell.addEventListener('mouseenter', fillColorOnHover);
         newCell.addEventListener('mouseup', fillColorOnMouseUp);
@@ -43,8 +46,22 @@ window.PixelPainter = function(height, width){
   }
 
   function fillColorOnClick (e){
-    clickHappenYet = true;
-    e.target.style.backgroundColor = selectedColor;
+    if(fillClicked === true){
+      colorToFill=e.target.style.backgroundColor;
+
+      var allCanvasCells = document.getElementsByClassName('canvasCells');
+      for (let i = 0; i < allCanvasCells.length; i++){
+        if(allCanvasCells[i].style.backgroundColor === colorToFill){
+          allCanvasCells[i].style.backgroundColor = selectedColor;
+        }
+      }
+      fillClicked = false;
+    }else{
+      clickHappenYet = true;
+      e.target.style.backgroundColor = selectedColor;
+
+    }
+
   }
 
   const toolBox=document.createElement("div");
@@ -115,7 +132,7 @@ window.PixelPainter = function(height, width){
 
   const fillButton = document.createElement('div');
   fillButton.className = 'toolBoxButton';
-  // fillButton.addEventListener('click', activateFill);
+  fillButton.addEventListener('click', activateFill);
   toolBox.appendChild(fillButton);
 
   const fillImg = document.createElement('img');
@@ -132,6 +149,21 @@ window.PixelPainter = function(height, width){
   eraserImg.className = 'toolBoxButtonImg';
   eraserImg.src = 'eraser.png';
   eraserButton.appendChild(eraserImg);
+
+
+  var fillClicked=false;
+
+  function activateFill () {
+    fillClicked=true;
+
+  }
+
+
+
+
+
+
+
 };
 
 PixelPainter(25,25);
