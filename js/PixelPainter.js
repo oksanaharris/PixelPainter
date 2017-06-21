@@ -2,9 +2,6 @@
 
 window.PixelPainter = function(height, width){
 
-  // var gridHeight=height;
-  // var gridWidth=width;
-
   var main=document.getElementById("pixelPainter");
   let canvasDiv=document.createElement("div");
   canvasDiv.id='pp-canvas';
@@ -14,7 +11,6 @@ window.PixelPainter = function(height, width){
   var clickHappenYet = false;
 
   var selectedColor = 'green';
-
 
   function canvasGrid(gridHeight, gridWidth, classStr, parent){
    for(i=1; i<=gridHeight; i++){
@@ -52,6 +48,13 @@ window.PixelPainter = function(height, width){
   }
 
   const toolBox=document.createElement("div");
+
+  const clear = document.createElement("div");
+  clear.addEventListener("click", clearFunc);
+  clear.id = 'clearBtn';
+  toolBox.appendChild(clear);
+  clear.innerHTML="Start over";
+
   const colorPalette=document.createElement("div");
   toolBox.appendChild(colorPalette);
 
@@ -59,16 +62,7 @@ window.PixelPainter = function(height, width){
   toolBox.id="toolBox";
   colorPalette.id="colorPalette";
 
-  const clear = document.createElement("button");
-  const eraser = document.createElement("button");
-  eraser.addEventListener("click", eraserFunc);
-  clear.addEventListener("click", clearFunc);
-
-  toolBox.appendChild(clear);
-  toolBox.appendChild(eraser);
-
-  clear.innerHTML="clear";
-  eraser.innerHTML="eraser";
+  
 
   function paletteGrid(height, width, classStr, parent){
    for(i=1; i<=height; i++){
@@ -84,7 +78,7 @@ window.PixelPainter = function(height, width){
    }
   }
 
-  paletteGrid (2,5, 'paletteCells', colorPalette);
+  paletteGrid (5,2, 'paletteCells', colorPalette);
 
   var chosenColors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'purple', 'violet', 'black', 'white'];
 
@@ -108,5 +102,36 @@ window.PixelPainter = function(height, width){
       allCanvasCells[i].style.backgroundColor = 'white';
     }
   }
+
+  const brushButton = document.createElement('div');
+  brushButton.className = 'toolBoxButton';
+  // brushButton.addEventListener('click', activateBrush);
+  toolBox.appendChild(brushButton);
+
+  const brushImg = document.createElement('img');
+  brushImg.className = 'toolBoxButtonImg';
+  brushImg.src = 'paint_brush.jpg';
+  brushButton.appendChild(brushImg);
+
+  const fillButton = document.createElement('div');
+  fillButton.className = 'toolBoxButton';
+  // fillButton.addEventListener('click', activateFill);
+  toolBox.appendChild(fillButton);
+
+  const fillImg = document.createElement('img');
+  fillImg.className = 'toolBoxButtonImg';
+  fillImg.src = 'paint_bucket.png';
+  fillButton.appendChild(fillImg);
+
+  const eraserButton = document.createElement('div');
+  eraserButton.className = 'toolBoxButton';
+  eraserButton.addEventListener('click', eraserFunc);
+  toolBox.appendChild(eraserButton);
+
+  const eraserImg = document.createElement('img');
+  eraserImg.className = 'toolBoxButtonImg';
+  eraserImg.src = 'eraser.png';
+  eraserButton.appendChild(eraserImg);
 };
+
 PixelPainter(25,25);
