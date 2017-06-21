@@ -35,26 +35,6 @@ window.PixelPainter = function(height, width){
 
   canvasGrid(height, width, 'canvasCells', canvasDiv);
 
-  function fillColorOnHover (e){
-    if(clickHappenYet === true){
-      switch (toolPicked){
-        case 'eraser':
-          e.target.style.backgroundColor = 'white';
-          break;
-        case 'brush':
-          e.target.style.backgroundColor = selectedColor;
-          break;
-        default:
-          e.target.style.backgroundColor = selectedColor;
-          break;
-        }
-    }
-  }
-
-  function fillColorOnMouseUp (e){
-    clickHappenYet = false;
-  }
-
   function fillColorOnClick (e){
     clickHappenYet = true;
 
@@ -87,6 +67,26 @@ window.PixelPainter = function(height, width){
 
   }
 
+  function fillColorOnHover (e){
+    if(clickHappenYet === true){
+      switch (toolPicked){
+        case 'eraser':
+          e.target.style.backgroundColor = 'white';
+          break;
+        case 'brush':
+          e.target.style.backgroundColor = selectedColor;
+          break;
+        default:
+          e.target.style.backgroundColor = selectedColor;
+          break;
+        }
+    }
+  }
+
+  function fillColorOnMouseUp (e){
+    clickHappenYet = false;
+  }
+
   const toolBox=document.createElement("div");
 
   const clear = document.createElement("div");
@@ -101,8 +101,6 @@ window.PixelPainter = function(height, width){
   pixelPainter.appendChild(toolBox);
   toolBox.id="toolBox";
   colorPalette.id="colorPalette";
-
-
 
   function paletteGrid(height, width, classStr, parent){
    for(i=1; i<=height; i++){
@@ -130,10 +128,13 @@ window.PixelPainter = function(height, width){
 
   function pickColor (e) {
     selectedColor = e.target.style.backgroundColor;
-  }
 
-  function eraserFunc (e) {
-    toolPicked = 'eraser';
+    var allColors = document.getElementsByClassName('paletteCells');
+    for (var i = 0; i < allColors.length; i++){
+      allColors[i].className = 'paletteCells';
+    }
+
+    e.target.className += ' ' +'activeColor';
   }
 
   function clearFunc (e) {
@@ -144,8 +145,9 @@ window.PixelPainter = function(height, width){
   }
 
   const brushButton = document.createElement('div');
+  brushButton.id = 'brush';
   brushButton.className = 'toolBoxButton';
-  brushButton.addEventListener('click', activateBrush);
+  brushButton.addEventListener('click', selectTool);
   toolBox.appendChild(brushButton);
 
   const brushImg = document.createElement('img');
@@ -154,8 +156,9 @@ window.PixelPainter = function(height, width){
   brushButton.appendChild(brushImg);
 
   const fillButton = document.createElement('div');
+  fillButton.id = 'fill';
   fillButton.className = 'toolBoxButton';
-  fillButton.addEventListener('click', activateFill);
+  fillButton.addEventListener('click', selectTool);
   toolBox.appendChild(fillButton);
 
   const fillImg = document.createElement('img');
@@ -164,8 +167,9 @@ window.PixelPainter = function(height, width){
   fillButton.appendChild(fillImg);
 
   const eraserButton = document.createElement('div');
+  eraserButton.id = 'eraser';
   eraserButton.className = 'toolBoxButton';
-  eraserButton.addEventListener('click', eraserFunc);
+  eraserButton.addEventListener('click', selectTool);
   toolBox.appendChild(eraserButton);
 
   const eraserImg = document.createElement('img');
@@ -173,14 +177,42 @@ window.PixelPainter = function(height, width){
   eraserImg.src = 'eraser.png';
   eraserButton.appendChild(eraserImg);
 
+  function selectTool(e){
+    switch (e.target.id){
+      case 'fill':
+        toolPicked = 'fill';
+        break;
+      case 'brush':
+        toolPicked = 'brush';
+        break;
+      case 'eraser':
+        toolPicked = 'eraser';
+        break;
+      default:
+        toolPicked = 'brush';
+        break;
+    }
 
-  function activateFill () {
-    toolPicked = 'fill';
+    var allToolButtons = document.getElementsByClassName('toolBoxButton');
+    for (var i = 0; i < allToolButtons.length; i++){
+      allToolButtons[i].className = 'toolBoxButton';
+    }
+
+    e.target.className += ' ' +'clickedButton';
   }
 
-  function activateBrush () {
-    toolPicked = 'brush';
-  }
+  // function activateFill () {
+    
+  // }
+
+  // function activateBrush (e) {
+  //   toolPicked = 'brush';
+  //   e.target.className = 'clickedButton';
+  // }
+
+  // function eraserFunc (e) {
+  //   toolPicked = 'eraser';
+  // }
 };
 
 PixelPainter(25,25);
