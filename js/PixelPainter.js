@@ -16,7 +16,7 @@ window.PixelPainter = function(height, width){
    for(i=1; i<=gridHeight; i++){
       for(j=1; j<=gridWidth; j++){
         var newCell=document.createElement('div');
-        newCell.id = 'cell' + i + j;
+        newCell.id = 'cell' + i+'-' +j;
         newCell.className=classStr;
         newCell.addEventListener('mousedown', fillColorOnClick);
         newCell.addEventListener('mouseenter', fillColorOnHover);
@@ -62,7 +62,7 @@ window.PixelPainter = function(height, width){
   toolBox.id="toolBox";
   colorPalette.id="colorPalette";
 
-  
+
 
   function paletteGrid(height, width, classStr, parent){
    for(i=1; i<=height; i++){
