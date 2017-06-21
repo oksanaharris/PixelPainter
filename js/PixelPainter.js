@@ -144,38 +144,41 @@ window.PixelPainter = function(height, width){
     }
   }
 
-  const brushButton = document.createElement('div');
+  const brushButton = document.createElement('img');
+  brushButton.src = 'paint_brush.jpg';
   brushButton.id = 'brush';
   brushButton.className = 'toolBoxButton';
   brushButton.addEventListener('click', selectTool);
   toolBox.appendChild(brushButton);
 
-  const brushImg = document.createElement('img');
-  brushImg.className = 'toolBoxButtonImg';
-  brushImg.src = 'paint_brush.jpg';
-  brushButton.appendChild(brushImg);
+  // const brushImg = document.createElement('img');
+  // brushImg.className = 'toolBoxButtonImg';
+  // brushImg.src = 'paint_brush.jpg';
+  // brushButton.appendChild(brushImg);
 
-  const fillButton = document.createElement('div');
+  const fillButton = document.createElement('img');
+  fillButton.src = 'paint_bucket.png';
   fillButton.id = 'fill';
   fillButton.className = 'toolBoxButton';
   fillButton.addEventListener('click', selectTool);
   toolBox.appendChild(fillButton);
 
-  const fillImg = document.createElement('img');
-  fillImg.className = 'toolBoxButtonImg';
-  fillImg.src = 'paint_bucket.png';
-  fillButton.appendChild(fillImg);
+  // const fillImg = document.createElement('img');
+  // fillImg.className = 'toolBoxButtonImg';
+  // fillImg.src = 'paint_bucket.png';
+  // fillButton.appendChild(fillImg);
 
-  const eraserButton = document.createElement('div');
+  const eraserButton = document.createElement('img');
+  eraserButton.src = 'eraser.png';
   eraserButton.id = 'eraser';
   eraserButton.className = 'toolBoxButton';
   eraserButton.addEventListener('click', selectTool);
   toolBox.appendChild(eraserButton);
 
-  const eraserImg = document.createElement('img');
-  eraserImg.className = 'toolBoxButtonImg';
-  eraserImg.src = 'eraser.png';
-  eraserButton.appendChild(eraserImg);
+  // const eraserImg = document.createElement('img');
+  // eraserImg.className = 'toolBoxButtonImg';
+  // eraserImg.src = 'eraser.png';
+  // eraserButton.appendChild(eraserImg);
 
   function selectTool(e){
     switch (e.target.id){
@@ -184,6 +187,7 @@ window.PixelPainter = function(height, width){
         break;
       case 'brush':
         toolPicked = 'brush';
+        document.body.style.cursor = 'crosshair';
         break;
       case 'eraser':
         toolPicked = 'eraser';
@@ -200,19 +204,6 @@ window.PixelPainter = function(height, width){
 
     e.target.className += ' ' +'clickedButton';
   }
-
-  // function activateFill () {
-    
-  // }
-
-  // function activateBrush (e) {
-  //   toolPicked = 'brush';
-  //   e.target.className = 'clickedButton';
-  // }
-
-  // function eraserFunc (e) {
-  //   toolPicked = 'eraser';
-  // }
 };
 
 PixelPainter(25,25);
