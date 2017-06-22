@@ -144,12 +144,19 @@ window.PixelPainter = function(height, width){
     }
   }
 
+
+  var buttonsLineOne = document.createElement('div');
+  toolBox.appendChild(buttonsLineOne);
+
+  var buttonsLineTwo = document.createElement('div');
+  toolBox.appendChild(buttonsLineTwo);
+  
   const brushButton = document.createElement('img');
   brushButton.src = 'paint_brush.jpg';
   brushButton.id = 'brush';
   brushButton.className = 'toolBoxButton';
   brushButton.addEventListener('click', selectTool);
-  toolBox.appendChild(brushButton);
+  buttonsLineOne.appendChild(brushButton);
 
   // const brushImg = document.createElement('img');
   // brushImg.className = 'toolBoxButtonImg';
@@ -161,7 +168,7 @@ window.PixelPainter = function(height, width){
   fillButton.id = 'fill';
   fillButton.className = 'toolBoxButton';
   fillButton.addEventListener('click', selectTool);
-  toolBox.appendChild(fillButton);
+  buttonsLineOne.appendChild(fillButton);
 
   // const fillImg = document.createElement('img');
   // fillImg.className = 'toolBoxButtonImg';
@@ -173,17 +180,18 @@ window.PixelPainter = function(height, width){
   eraserButton.id = 'eraser';
   eraserButton.className = 'toolBoxButton';
   eraserButton.addEventListener('click', selectTool);
-  toolBox.appendChild(eraserButton);
+  buttonsLineTwo.appendChild(eraserButton);
 
   // const eraserImg = document.createElement('img');
   // eraserImg.className = 'toolBoxButtonImg';
   // eraserImg.src = 'eraser.png';
   // eraserButton.appendChild(eraserImg);
 
-  const clear = document.createElement("div");
+  const clear = document.createElement('img');
+  clear.src = 'new_page.png';
   clear.addEventListener("click", clearFunc);
   clear.id = 'clearBtn';
-  toolBox.appendChild(clear);
+  buttonsLineTwo.appendChild(clear);
   clear.innerHTML="Start over";
 
   function selectTool(e){
