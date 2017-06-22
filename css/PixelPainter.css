@@ -10,16 +10,24 @@
 }
 
 .paletteCells {
+  box-sizing: border-box;
+  margin-top: 5px;
+  margin-left: 5px;
   width:30px;
   height:30px;
-  border: solid 1px #888888;
+  border: solid 1px black;
   display:inline-block;
   border-radius: 100%;
-  box-shadow: 0px 5px 2px #888888;
+  /*box-shadow: 0px 5px 2px #888888;*/
 }
 
 .activeColor {
+  box-sizing: border-box;
   border: solid 2px black;
+  margin-top: 4px;
+  margin-left: 4px;
+  width:32px;
+  height:32px;
 }
 
 #pixelPainter {
@@ -60,9 +68,9 @@ button {
 }
 
 .toolBoxButton {
-  width: 50px;
-  height: 50px;
-  border-radius: 100%;
+  width: 35px;
+  height: 35px;
+  border-radius: 10px;
   /*box-shadow: 5px 5px 2px #888888;*/
   text-align: center;
   border: solid 2px #D0D0D0;
@@ -71,12 +79,12 @@ button {
   margin-right: 10px;
 }
 
-.toolBoxButtonImg {
+/*.toolBoxButtonImg {
   width: 35px;
   height: 35px;
   display: inline-block;
   margin-top: 8px;
-}
+}*/
 
 #clearBtn{
   width: 90px;
