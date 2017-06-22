@@ -11,8 +11,8 @@
 
 .paletteCells {
   box-sizing: border-box;
-  margin-top: 5px;
-  margin-left: 5px;
+  margin: 5px;
+
   width:30px;
   height:30px;
   border: solid 1px black;
@@ -24,14 +24,16 @@
 .activeColor {
   box-sizing: border-box;
   border: solid 2px black;
-  margin-top: 4px;
-  margin-left: 4px;
+  margin: 4px;
   width:32px;
   height:32px;
 }
 
 #pixelPainter {
   /*background-color: green;*/
+  width: 500px;
+  margin: auto;
+  text-align: center;
 }
 
 #pp-canvas {
@@ -64,6 +66,7 @@ button {
 #toolBox {
   /*background-color: yellow;*/
   display: inline-block;
+  margin-left: 80px;
   vertical-align: top;
 }
 
