@@ -105,6 +105,7 @@ window.PixelPainter = function(height, width){
   function paletteGrid(height, width, classStr, parent){
    for(i=1; i<=height; i++){
       for(j=1; j<=width; j++){
+        //these are either divs or buttons
         var newCell=document.createElement('div');
         newCell.id = 'color' + i + j;
         newCell.className=classStr;
@@ -129,6 +130,10 @@ window.PixelPainter = function(height, width){
   function pickColor (e) {
     selectedColor = e.target.style.backgroundColor;
 
+    displayActiveColor(e);
+  }
+
+  function displayActiveColor(e){
     var allColors = document.getElementsByClassName('paletteCells');
     for (var i = 0; i < allColors.length; i++){
       allColors[i].className = 'paletteCells';
@@ -187,7 +192,7 @@ window.PixelPainter = function(height, width){
         break;
       case 'brush':
         toolPicked = 'brush';
-        document.body.style.cursor = 'crosshair';
+        // document.body.style.cursor = 'crosshair';
         break;
       case 'eraser':
         toolPicked = 'eraser';
@@ -197,6 +202,10 @@ window.PixelPainter = function(height, width){
         break;
     }
 
+    displayActiveTool(e);
+  }
+
+  function displayActiveTool (e){
     var allToolButtons = document.getElementsByClassName('toolBoxButton');
     for (var i = 0; i < allToolButtons.length; i++){
       allToolButtons[i].className = 'toolBoxButton';
@@ -204,6 +213,7 @@ window.PixelPainter = function(height, width){
 
     e.target.className += ' ' +'clickedButton';
   }
+
 };
 
 PixelPainter(25,25);
