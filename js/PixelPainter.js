@@ -90,12 +90,6 @@ window.PixelPainter = function(height, width){
 
   const toolBox=document.createElement("div");
 
-  const clear = document.createElement("div");
-  clear.addEventListener("click", clearFunc);
-  clear.id = 'clearBtn';
-  toolBox.appendChild(clear);
-  clear.innerHTML="Start over";
-
   const colorPalette=document.createElement("div");
   toolBox.appendChild(colorPalette);
 
@@ -186,6 +180,12 @@ window.PixelPainter = function(height, width){
   // eraserImg.src = 'eraser.png';
   // eraserButton.appendChild(eraserImg);
 
+  const clear = document.createElement("div");
+  clear.addEventListener("click", clearFunc);
+  clear.id = 'clearBtn';
+  toolBox.appendChild(clear);
+  clear.innerHTML="Start over";
+
   function selectTool(e){
     switch (e.target.id){
       case 'fill':
@@ -216,4 +216,4 @@ window.PixelPainter = function(height, width){
   }
 };
 
-PixelPainter(25,25);
+PixelPainter(30,30);
