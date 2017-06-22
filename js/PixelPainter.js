@@ -152,7 +152,7 @@ window.PixelPainter = function(height, width){
   toolBox.appendChild(buttonsLineTwo);
   
   const brushButton = document.createElement('img');
-  brushButton.src = 'paint_brush.jpg';
+  brushButton.src = 'paint_brush.png';
   brushButton.id = 'brush';
   brushButton.className = 'toolBoxButton';
   brushButton.addEventListener('click', selectTool);
