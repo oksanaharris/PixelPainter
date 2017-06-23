@@ -1,15 +1,18 @@
 body {
   background-color: #ffeeee;
+  /*cursor: url(/paintbrush-tool-by-Vexels.png), auto;*/
+
+/*  cursor: crosshair;*/
 }
 
 #titleContainerDiv{
   /*background-color: green;*/
   display: block;
-  width: 915px;
-  padding-left: 14px;
+  width: 910px;
+  text-align: left;
   margin: auto;
   margin-bottom: 30px;
-  margin-top: 30px;
+  margin-top: 50px;
   box-sizing: border-box;
 }
 
@@ -28,7 +31,7 @@ body {
   height: 15px;
   background-color: #fffafa;
   display: inline-block;
-  box-shadow: inset 3px 3px 3px rgba(255, 255, 255, .4), inset -3px -3px 3px rgba(0, 0, 0, .4);
+  box-shadow: inset 3px 3px 3px rgba(255, 255, 255, .4), inset -3px -3px 3px rgba(0, 0, 0, .3);
 }
 
 .canvasCells {
@@ -39,7 +42,7 @@ body {
 /*  border-right: solid 1px #D0D0D0;
   border-bottom: solid 1px #D0D0D0;*/
   display: inline-block;
-  box-shadow: inset 3px 3px 3px rgba(255, 255, 255, .4), inset -3px -3px 3px rgba(0, 0, 0, .4);
+  box-shadow: inset 3px 3px 3px rgba(255, 255, 255, .4), inset -3px -3px 3px rgba(0, 0, 0, .3);
 
 }
 
@@ -65,8 +68,8 @@ body {
 }
 
 #contents {
-  /*background-color: green;*/
-  width: 945px;
+  /*background-color: yellow;*/
+  width: 910px;
   margin: auto;
   text-align: right;
 
@@ -100,7 +103,7 @@ body {
 }
 
 #toolsLineOne{
-  margin-top: 2px;
+  margin-top: 10px;
 
 }
 

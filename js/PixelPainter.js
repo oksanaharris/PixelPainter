@@ -26,7 +26,7 @@ window.PixelPainter = function(height, width){
 
   var clickHappenYet = false;
 
-  var selectedColor = 'green';
+  var selectedColor = '#ffd9d9';
 
   var colorToFill;
 
@@ -49,43 +49,55 @@ window.PixelPainter = function(height, width){
 
   pageTitleGrid(9,51);
 
-  var titleLetterArr = ["titleCell3-2", "titleCell4-2", "titleCell5-2", "titleCell6-2", "titleCell7-2", "titleCell3-3", "titleCell4-4", "titleCell5-3", "titleCell4-6", "titleCell3-6", "titleCell5-6", "titleCell6-6", "titleCell7-6", "titleCell3-8", "titleCell4-9", "titleCell5-10", "titleCell6-11", "titleCell7-12", "titleCell7-8", "titleCell6-9", "titleCell4-11", "titleCell3-12", "titleCell3-14", "titleCell4-14", "titleCell5-14", "titleCell6-14", "titleCell7-14", "titleCell7-15", "titleCell7-16", "titleCell5-15", "titleCell5-16", "titleCell3-15", "titleCell3-16", "titleCell3-18", "titleCell4-18", "titleCell5-18", "titleCell6-18", "titleCell7-18", "titleCell7-19", "titleCell7-20", "titleCell7-23", "titleCell6-23", "titleCell5-23", "titleCell4-23", "titleCell3-23", "titleCell3-24", "titleCell4-25", "titleCell5-24", "titleCell7-26", "titleCell6-27", "titleCell5-27", "titleCell4-28", "titleCell3-28", "titleCell5-29", "titleCell6-29", "titleCell7-30", "titleCell6-28", "titleCell3-32", "titleCell4-32", "titleCell5-32", "titleCell6-32", "titleCell7-32", "titleCell3-34", "titleCell4-34", "titleCell5-34", "titleCell6-34", "titleCell7-34", "titleCell4-35", "titleCell5-36", "titleCell7-37", "titleCell6-37", "titleCell4-37", "titleCell3-37", "titleCell3-39", "titleCell3-40", "titleCell3-41", "titleCell4-40", "titleCell5-40", "titleCell6-40", "titleCell7-40",  "titleCell7-43", "titleCell7-44", "titleCell7-45", "titleCell6-43", "titleCell5-43", "titleCell5-44", "titleCell5-45", "titleCell4-43", "titleCell3-43", "titleCell3-44", "titleCell3-45", "titleCell3-47", "titleCell4-47", "titleCell5-47", "titleCell6-47", "titleCell7-47", "titleCell6-49", "titleCell7-49", "titleCell5-48", "titleCell4-49", "titleCell3-48"];
+  var titleLetterArr = ["titleCell3-2", "titleCell4-2", "titleCell5-2", "titleCell6-2", "titleCell7-2", "titleCell3-3", "titleCell4-4", "titleCell5-3", "titleCell4-6", "titleCell3-6", "titleCell5-6", "titleCell6-6", "titleCell7-6", "titleCell3-8", "titleCell4-9", "titleCell5-10", "titleCell6-11", "titleCell7-12", "titleCell7-8", "titleCell6-9", "titleCell4-11", "titleCell3-12", "titleCell3-14", "titleCell4-14", "titleCell5-14", "titleCell6-14", "titleCell7-14", "titleCell7-15", "titleCell7-16", "titleCell5-15", "titleCell5-16", "titleCell3-15", "titleCell3-16", "titleCell3-18", "titleCell4-18", "titleCell5-18", "titleCell6-18", "titleCell7-18", "titleCell7-19", "titleCell7-20", "titleCell7-23", "titleCell6-23", "titleCell5-23", "titleCell4-23", "titleCell3-23", "titleCell3-24", "titleCell4-25", "titleCell5-24", "titleCell7-26", "titleCell6-27", "titleCell5-27", "titleCell4-28", "titleCell3-28", "titleCell5-29", "titleCell6-29", "titleCell7-30", "titleCell6-28", "titleCell3-32", "titleCell4-32", "titleCell5-32", "titleCell6-32", "titleCell7-32", "titleCell3-34", "titleCell4-34", "titleCell5-34", "titleCell6-34", "titleCell7-34", "titleCell5-35", "titleCell6-36", "titleCell7-37", "titleCell5-37", "titleCell4-37", "titleCell3-37", "titleCell3-39", "titleCell3-40", "titleCell3-41", "titleCell4-40", "titleCell5-40", "titleCell6-40", "titleCell7-40",  "titleCell7-43", "titleCell7-44", "titleCell7-45", "titleCell6-43", "titleCell5-43", "titleCell5-44", "titleCell5-45", "titleCell4-43", "titleCell3-43", "titleCell3-44", "titleCell3-45", "titleCell3-47", "titleCell4-47", "titleCell5-47", "titleCell6-47", "titleCell7-47", "titleCell6-49", "titleCell7-49", "titleCell5-48", "titleCell4-49", "titleCell3-48"];
 
   var cellToFill;
 
   var randomColor;
 
-  var titleColors = ['black', 'red', 'purple', 'grey', 'rgb(54, 4, 67)', 'blue', 'green'];
+  var titleColors = ['#6dc5fb','#e30c4d', '#62d9cf', '#cb4aab', 'purple', '#fa8072'];
 
   for (var y = 0; y < titleLetterArr.length; y++){
-    randomColor = titleColors[(Math.floor(Math.random()*7))];
+    randomColor = titleColors[(Math.floor(Math.random()*6))];
     cellToFill = document.getElementById(titleLetterArr[y]);
     cellToFill.style.backgroundColor = randomColor;
+    cellToFill.style.border = 'solid 1px black';
+    cellToFill.style.borderRadius = '2px';
+    cellToFill.addEventListener('mousedown', fillColorOnClick);
+    cellToFill.addEventListener('mouseenter', fillColorOnHover);
+    cellToFill.addEventListener('mouseup', fillColorOnMouseUp);
   }
 
   function canvasGrid(gridHeight, gridWidth, classStr, parent){
-   for(i=1; i<=gridHeight; i++){
+    for(i=1; i<=gridHeight; i++){
       for(j=1; j<=gridWidth; j++){
         var newCell=document.createElement('div');
         newCell.id = 'cell' + i+'-' +j;
         newCell.className=classStr;
         newCell.style.backgroundColor = '#fffafa';
-        newCell.addEventListener('mousedown', fillColorOnClick);
-        newCell.addEventListener('mouseenter', fillColorOnHover);
-        newCell.addEventListener('mouseup', fillColorOnMouseUp);
         parent.appendChild(newCell);
       }
       var lineBreak=document.createElement('br');
       parent.appendChild(lineBreak);
-   }
+    }
+
+    for(k=2; k<=(gridHeight-1); k++){
+      for(l=2; l<=(gridWidth-1); l++){
+        var targetId = 'cell' + k + '-' + l;
+        var targetEl = document.getElementById(targetId);
+        targetEl.addEventListener('mousedown', fillColorOnClick);
+        targetEl.addEventListener('mouseenter', fillColorOnHover);
+        targetEl.addEventListener('mouseup', fillColorOnMouseUp);
+      }
+    }
   }
 
   canvasGrid(height, width, 'canvasCells', canvasDiv);
 
   function colorCanvasBorder (width, height){
-    var borderColor = 'grey';
-    var borderHeight = '10px';
-    var borderWidth = '10px';
+    var borderColor = '#939393';
+    var borderHeight = '7px';
+    var borderWidth = '7px';
 
     for (var i = 1; i <= width; i++){
       var topBorderCellId = 'cell' + 1 + '-' + i;
@@ -125,9 +137,9 @@ window.PixelPainter = function(height, width){
   colorCanvasBorder(width, height);
 
   function colorTitleBorder (width, height){
-    var borderColor = 'grey';
-    var borderHeight = '10px';
-    var borderWidth = '10px';
+    var borderColor = '#939393';
+    var borderHeight = '7px';
+    var borderWidth = '7px';
 
     for (var i = 0; i <= width; i++){
       var topBorderCellId = 'titleCell' + 1 + '-' + i;
@@ -231,22 +243,24 @@ window.PixelPainter = function(height, width){
   toolBox.id="toolBox";
   colorPalette.id="colorPalette";
 
-  function paletteGrid(height, width, classStr, parent){
+  function paletteGrid(height, width, parent){
    for(i=1; i<=height; i++){
       for(j=1; j<=width; j++){
         //these are either divs or buttons
         var newCell=document.createElement('div');
-        newCell.id = 'color' + i + j;
-        newCell.className=classStr;
+        newCell.id = 'color' + i + '-' + j;
+        newCell.className = 'paletteCells';
         newCell.addEventListener('click', pickColor);
         parent.appendChild(newCell);
       }
       var lineBreak=document.createElement('br');
       parent.appendChild(lineBreak);
    }
+
+   document.getElementById('color1-1').className = 'paletteCells activeColor';
   }
 
-  paletteGrid (5,2, 'paletteCells', colorPalette);
+  paletteGrid (5,2, colorPalette);
 
   var chosenColors = ['#ffd9d9','#f6f68c', '#f283d1', '#6dc5fb', '#8affa4', '#62d9cf', '#cb4aab', 'purple', 'rgb(54, 4, 67)', '#d0b3cc'];
 
@@ -272,9 +286,12 @@ window.PixelPainter = function(height, width){
   }
 
   function clearFunc (e) {
-    var allCanvasCells = document.getElementsByClassName('canvasCells');
-    for (var i = 0; i < allCanvasCells.length; i++){
-      allCanvasCells[i].style.backgroundColor = '#fffafa';
+    for(k=2; k<=24; k++){
+      for(l=2; l<=51; l++){
+        var targetId = 'cell' + k + '-' + l;
+        var targetEl = document.getElementById(targetId);
+        targetEl.style.backgroundColor = '#fffafa';
+      }
     }
   }
 
@@ -289,7 +306,7 @@ window.PixelPainter = function(height, width){
   const brushButton = document.createElement('img');
   brushButton.src = 'paint_brush.png';
   brushButton.id = 'brush';
-  brushButton.className = 'toolBoxButton';
+  brushButton.className = 'toolBoxButton clickedButton';
   brushButton.addEventListener('click', selectTool);
   buttonsLineOne.appendChild(brushButton);
 
@@ -336,7 +353,6 @@ window.PixelPainter = function(height, width){
         break;
       case 'brush':
         toolPicked = 'brush';
-        // document.body.style.cursor = 'crosshair';
         break;
       case 'eraser':
         toolPicked = 'eraser';
@@ -359,4 +375,6 @@ window.PixelPainter = function(height, width){
   }
 };
 
-PixelPainter(24,52);
+PixelPainter(25,52);
+
+
