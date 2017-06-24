@@ -147,7 +147,7 @@ window.PixelPainter = function(height, width){
 
       for (var j = topY; j < 25; j++){
         currentCell = document.getElementById('cell' + j + '-' + topX);
-        currentCell.style.backgroundColor = 'black';
+        currentCell.style.backgroundColor = selectedColor;
         
         leftNeighbor = document.getElementById('cell' + j + '-' + (Number(topX)-1));
         if (leftNeighbor.style.backgroundColor === colorToReplace){
