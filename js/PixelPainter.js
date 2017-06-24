@@ -105,64 +105,84 @@ window.PixelPainter = function(height, width){
   }
 
   function actualFill (e){
-    console.log('the Actual Fill function is running');
-    console.log(e.target.dataset.y);
-    console.log(e.target.dataset.x);
-    console.log(e.target.id);
 
-    var fillCell;
-
-    var x = e.target.dataset.x;
-    var y = e.target.dataset.y;
     var colorToReplace = e.target.style.backgroundColor;
-    var topFillCellY;
-
-    
-    for (var i = y; i > 1; i --){
-      fillCell = document.getElementById('cell' + i + '-' + x);
-      if (fillCell.style.backgroundColor === colorToReplace){
-        fillCell.style.backgroundColor = 'black';
-      } else {
-        console.log('stop');
-        break;
-      }
-    }
-    topFillCellY = Number(i) + 1;
-    console.log('last cell ' + topFillCellY);
 
     var arr = [];
-    var foundLeft = false;
-    var foundRight = false;
 
-    var leftNeighbor;
-    var rightNeighbor;
+    arr.push(e.target.id);
 
-    for (var j = topFillCellY; j < e.target.dataset.y; j++){
-      console.log('neightbor loop happening');
-      leftNeighbor = document.getElementById('cell' + j + '-' + (Number(x)-1));
-      if (leftNeighbor.style.backgroundColor === colorToReplace){
-        if (foundLeft === false){
-          leftNeighbor.style.backgroundColor = 'red';
-          arr.push(leftNeighbor.id);
-          foundLeft = true;
+    function findUpperBoundary (cellId){
+      var passedInCell = document.getElementById(cellId);
+      let x = passedInCell.dataset.x;
+      let y = passedInCell.dataset.y;
+
+      for (var i = y; i > 1; i --){
+        checkCell = document.getElementById('cell' + i + '-' + x);
+        if (checkCell.style.backgroundColor !== colorToReplace){
+          break;
         }
-      } else {
-        foundLeft = false;
       }
-
-      rightNeighbor = document.getElementById('cell' + j + '-' + (Number(x)+1));
-      if (rightNeighbor.style.backgroundColor === colorToReplace){
-        if (foundRight === false){
-          rightNeighbor.style.backgroundColor = 'green';
-          arr.push(rightNeighbor.id);
-          foundRight = true;
-        }
-      } else {
-        foundRight = false;
-      }
+      let topBoundary = Number(i) + 1;
+      let topCellId = 'cell' + topBoundary + '-' + x;
+      return topCellId;
     }
 
 
+    function stepDownFillFindOthers(){
+      var current = arr.shift();
+      var topCell = findUpperBoundary(current);
+
+      var topY = document.getElementById(topCell).dataset.y;
+      var topX = document.getElementById(topCell).dataset.x;
+
+      var currentCell;
+      var nextCell;
+
+      var foundLeft = false;
+      var foundRight = false;
+
+      var leftNeighbor;
+      var rightNeighbor;
+
+      for (var j = topY; j < 25; j++){
+        currentCell = document.getElementById('cell' + j + '-' + topX);
+        currentCell.style.backgroundColor = 'black';
+        
+        leftNeighbor = document.getElementById('cell' + j + '-' + (Number(topX)-1));
+        if (leftNeighbor.style.backgroundColor === colorToReplace){
+          if (foundLeft === false){
+            // leftNeighbor.style.backgroundColor = 'red';
+            arr.push(leftNeighbor.id);
+            foundLeft = true;
+          }
+        } else {
+          foundLeft = false;
+        }
+
+        rightNeighbor = document.getElementById('cell' + j + '-' + (Number(topX)+1));
+        if (rightNeighbor.style.backgroundColor === colorToReplace){
+          if (foundRight === false){
+            // rightNeighbor.style.backgroundColor = 'green';
+            arr.push(rightNeighbor.id);
+            foundRight = true;
+          }
+        } else {
+          foundRight = false;
+        }
+
+        nextCell = document.getElementById('cell' + (Number(j)+1) + '-' + topX);
+        if (nextCell.style.backgroundColor !== colorToReplace){
+          break;
+        }
+      }
+
+      return arr;
+    }
+
+    while (arr[0]){
+      stepDownFillFindOthers();
+    }
   }
 
   canvasGrid(height, width, 'canvasCells', canvasDiv);
