@@ -115,14 +115,50 @@ window.PixelPainter = function(height, width){
     var x = e.target.dataset.x;
     var y = e.target.dataset.y;
     var colorToReplace = e.target.style.backgroundColor;
+    var topFillCellY;
 
-
+    
     for (var i = y; i > 1; i --){
       fillCell = document.getElementById('cell' + i + '-' + x);
       if (fillCell.style.backgroundColor === colorToReplace){
         fillCell.style.backgroundColor = 'black';
       } else {
+        console.log('stop');
         break;
+      }
+    }
+    topFillCellY = Number(i) + 1;
+    console.log('last cell ' + topFillCellY);
+
+    var arr = [];
+    var foundLeft = false;
+    var foundRight = false;
+
+    var leftNeighbor;
+    var rightNeighbor;
+
+    for (var j = topFillCellY; j < e.target.dataset.y; j++){
+      console.log('neightbor loop happening');
+      leftNeighbor = document.getElementById('cell' + j + '-' + (Number(x)-1));
+      if (leftNeighbor.style.backgroundColor === colorToReplace){
+        if (foundLeft === false){
+          leftNeighbor.style.backgroundColor = 'red';
+          arr.push(leftNeighbor.id);
+          foundLeft = true;
+        }
+      } else {
+        foundLeft = false;
+      }
+
+      rightNeighbor = document.getElementById('cell' + j + '-' + (Number(x)+1));
+      if (rightNeighbor.style.backgroundColor === colorToReplace){
+        if (foundRight === false){
+          rightNeighbor.style.backgroundColor = 'green';
+          arr.push(rightNeighbor.id);
+          foundRight = true;
+        }
+      } else {
+        foundRight = false;
       }
     }
 
