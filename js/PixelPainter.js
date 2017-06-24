@@ -4,6 +4,8 @@ window.PixelPainter = function(height, width){
 
   var main=document.getElementById("pixelPainter");
 
+  main.addEventListener('mouseup', fillColorOnMouseUp);
+
   var titleContainer = document.createElement('div');
   titleContainer.id = 'titleContainerDiv';
   main.appendChild(titleContainer);
@@ -65,8 +67,16 @@ window.PixelPainter = function(height, width){
     cellToFill.style.borderRadius = '2px';
     cellToFill.addEventListener('mousedown', fillColorOnClick);
     cellToFill.addEventListener('mouseenter', fillColorOnHover);
-    cellToFill.addEventListener('mouseup', fillColorOnMouseUp);
+    // cellToFill.addEventListener('mouseup', fillColorOnMouseUp);
   }
+
+  setInterval (function refreshTitleColors(){
+    for (var y = 0; y < titleLetterArr.length; y++){
+      randomColor = titleColors[(Math.floor(Math.random()*6))];
+      cellToFill = document.getElementById(titleLetterArr[y]);
+      cellToFill.style.backgroundColor = randomColor;
+    }
+  }, 100);
 
   function canvasGrid(gridHeight, gridWidth, classStr, parent){
     for(i=1; i<=gridHeight; i++){
@@ -272,8 +282,14 @@ window.PixelPainter = function(height, width){
 
   function pickColor (e) {
     selectedColor = e.target.style.backgroundColor;
-
     displayActiveColor(e);
+
+    if (toolPicked === 'eraser'){
+      toolPicked = 'brush';
+
+      document.getElementById('eraser').className = 'toolBoxButton';
+      document.getElementById('brush').className = 'toolBoxButton clickedButton';
+      }
   }
 
   function displayActiveColor(e){

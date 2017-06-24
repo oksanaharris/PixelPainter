@@ -5,6 +5,15 @@ body {
 /*  cursor: crosshair;*/
 }
 
+#pixelPainter{
+  /*background-color: yellow;*/
+  width: 100%;
+  height: 100%;
+  padding-top: 50px;
+  box-sizing: border-box;
+
+}
+
 #titleContainerDiv{
   /*background-color: green;*/
   display: block;
@@ -12,7 +21,7 @@ body {
   text-align: left;
   margin: auto;
   margin-bottom: 30px;
-  margin-top: 50px;
+  /*margin-top: 50px;*/
   box-sizing: border-box;
 }
 
