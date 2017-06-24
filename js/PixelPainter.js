@@ -98,8 +98,35 @@ window.PixelPainter = function(height, width){
         targetEl.addEventListener('mousedown', fillColorOnClick);
         targetEl.addEventListener('mouseenter', fillColorOnHover);
         targetEl.addEventListener('mouseup', fillColorOnMouseUp);
+        targetEl.dataset.y = k;
+        targetEl.dataset.x = l;
       }
     }
+  }
+
+  function actualFill (e){
+    console.log('the Actual Fill function is running');
+    console.log(e.target.dataset.y);
+    console.log(e.target.dataset.x);
+    console.log(e.target.id);
+
+    var fillCell;
+
+    var x = e.target.dataset.x;
+    var y = e.target.dataset.y;
+    var colorToReplace = e.target.style.backgroundColor;
+
+
+    for (var i = y; i > 1; i --){
+      fillCell = document.getElementById('cell' + i + '-' + x);
+      if (fillCell.style.backgroundColor === colorToReplace){
+        fillCell.style.backgroundColor = 'black';
+      } else {
+        break;
+      }
+    }
+
+
   }
 
   canvasGrid(height, width, 'canvasCells', canvasDiv);
@@ -205,6 +232,10 @@ window.PixelPainter = function(height, width){
           }
         }
         fillClicked = false;
+        break;
+
+      case 'actualFill':
+        actualFill(e);
         break;
 
       case 'eraser':
@@ -360,7 +391,15 @@ window.PixelPainter = function(height, width){
   clear.addEventListener("click", clearFunc);
   clear.id = 'clearBtn';
   buttonsLineTwo.appendChild(clear);
+  buttonsLineTwo.appendChild(document.createElement('br'));
   clear.innerHTML="Start over";
+
+  const experimentalBtn = document.createElement('button');
+  experimentalBtn.id = 'actualFill';
+  experimentalBtn.addEventListener("click", selectTool);
+  experimentalBtn.className = 'toolBoxButton';
+  buttonsLineTwo.appendChild(experimentalBtn);
+  experimentalBtn.innerHTML = 'F';
 
   function selectTool(e){
     switch (e.target.id){
@@ -372,6 +411,9 @@ window.PixelPainter = function(height, width){
         break;
       case 'eraser':
         toolPicked = 'eraser';
+        break;
+      case 'actualFill':
+        toolPicked = 'actualFill';
         break;
       default:
         toolPicked = 'brush';
