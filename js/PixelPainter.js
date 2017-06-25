@@ -303,6 +303,10 @@ window.PixelPainter = function(height, width){
         e.target.style.backgroundColor = selectedColor;
         break;
 
+      case 'flower':
+        createFlower(e);
+        break;
+
       default:
         clickHappenYet = true;
         e.target.style.backgroundColor = selectedColor;
@@ -457,6 +461,13 @@ window.PixelPainter = function(height, width){
   buttonsLineTwo.appendChild(experimentalBtn);
   experimentalBtn.innerHTML = 'F';
 
+  const flowerBtn = document.createElement('button');
+  flowerBtn.id = 'flower';
+  flowerBtn.addEventListener("click", selectTool);
+  flowerBtn.className = 'toolBoxButton';
+  buttonsLineTwo.appendChild(flowerBtn);
+  flowerBtn.innerHTML = '*';
+
   function selectTool(e){
     switch (e.target.id){
       case 'fill':
@@ -470,6 +481,9 @@ window.PixelPainter = function(height, width){
         break;
       case 'actualFill':
         toolPicked = 'actualFill';
+        break;
+      case 'flower':
+        toolPicked = 'flower';
         break;
       default:
         toolPicked = 'brush';
@@ -486,6 +500,31 @@ window.PixelPainter = function(height, width){
     }
 
     e.target.className += ' ' +'clickedButton';
+  }
+
+  function createFlower(e){
+    var flowerColorArr = [
+      ['#fffafa', '#6dc5fb', '#8affa4', '#6dc5fb', '#fffafa'],
+      ['#6dc5fb', '#cb4aab', '#f6f68c', '#cb4aab', '#6dc5fb'],
+      ['#8affa4', '#f6f68c', 'rgb(54, 4, 67)', '#f6f68c', '#8affa4'],
+      ['#6dc5fb', '#cb4aab', '#f6f68c', '#cb4aab', '#6dc5fb'],
+      ['#fffafa', '#6dc5fb', '#8affa4', '#6dc5fb', '#fffafa']
+    ];
+
+    var clickedCell = document.getElementById(e.target.id);
+    var startCellX = Number(clickedCell.dataset.x)-2;
+    var startCellY = Number(clickedCell.dataset.y)-2;
+    var startCell = document.getElementById('cell' + startCellY + '-' + startCellX);
+
+    var affectedCell;
+
+
+    for (var y = 0; y < 5; y++){
+      for (var x = 0; x < 5; x++){
+        affectedCell = document.getElementById('cell' + (Number(startCellY)+y) + '-' + ((Number(startCellX)+x)));
+        affectedCell.style.backgroundColor=flowerColorArr[y][x];
+      }
+    }
   }
 };
 

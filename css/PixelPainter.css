@@ -1,5 +1,7 @@
 body {
-  background-color: #ffeeee;
+  /*background-color: #e6ebff*/
+  background: linear-gradient(to bottom right, #e6ebff, #d1f1ff);
+  /*background-color: #ffeeee;*/
   /*cursor: url(/paintbrush-tool-by-Vexels.png), auto;*/
 
 /*  cursor: crosshair;*/
