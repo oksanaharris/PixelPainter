@@ -326,18 +326,35 @@ window.PixelPainter = function(height, width){
   }
 
   function fillColorOnHover (e){
+    let backgroundColor;
+
+    switch (toolPicked){
+      case 'eraser':
+        backgroundColor = '#fffafa';
+        break;
+      case 'brush':
+        backgroundColor = selectedColor;
+        break;
+      default:
+        backgroundColor = selectedColor;
+        break;
+    }
+
+    let target;
     if(clickHappenYet === true){
-      switch (toolPicked){
-        case 'eraser':
-          e.target.style.backgroundColor = '#fffafa';
-          break;
-        case 'brush':
-          e.target.style.backgroundColor = selectedColor;
-          break;
-        default:
-          e.target.style.backgroundColor = selectedColor;
-          break;
-        }
+      if (e.type === 'mouseenter'){
+        target = e.target;
+        target.style.backgroundColor = backgroundColor;
+      }
+
+      if (e.type === 'touchmove'){
+        e.preventDefault();
+        e.stopPropagation();
+        let changedTouch = e.changedTouches[0];
+        let elem = document.elementFromPoint(changedTouch.clientX, changedTouch.clientY);
+        target = document.getElementById(elem.id);
+        target.style.backgroundColor = backgroundColor;
+      }
     }
   }
 
@@ -412,13 +429,17 @@ window.PixelPainter = function(height, width){
     }
   }
 
+  var painterTools = document.createElement('div');
+  painterTools.id = 'painterTools';
+  toolBox.appendChild(painterTools);
 
   var buttonsLineOne = document.createElement('div');
   buttonsLineOne.id = 'toolsLineOne';
-  toolBox.appendChild(buttonsLineOne);
+  painterTools.appendChild(buttonsLineOne);
 
   var buttonsLineTwo = document.createElement('div');
-  toolBox.appendChild(buttonsLineTwo);
+  buttonsLineTwo.id = 'toolsLineTwo';
+  painterTools.appendChild(buttonsLineTwo);
 
   const brushButton = document.createElement('img');
   brushButton.src = 'paint_brush.png';
@@ -459,11 +480,12 @@ window.PixelPainter = function(height, width){
 
   const clear = document.createElement('img');
   clear.src = 'new_page.png';
+  clear.className = 'toolBoxButton';
   clear.addEventListener("click", clearFunc);
   clear.id = 'clearBtn';
   buttonsLineTwo.appendChild(clear);
   buttonsLineTwo.appendChild(document.createElement('br'));
-  clear.innerHTML="Start over";
+  // clear.innerHTML="Start over";
 
   const experimentalBtn = document.createElement('img');
   // experimentalBtn.id = 'actualFill';
