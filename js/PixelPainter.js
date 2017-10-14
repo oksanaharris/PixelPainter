@@ -5,6 +5,7 @@ window.PixelPainter = function(height, width){
   var main=document.getElementById("pixelPainter");
 
   main.addEventListener('mouseup', fillColorOnMouseUp);
+  main.addEventListener('touchend', fillColorOnMouseUp);
 
   var titleContainer = document.createElement('div');
   titleContainer.id = 'titleContainerDiv';
@@ -66,7 +67,9 @@ window.PixelPainter = function(height, width){
     cellToFill.style.border = 'solid 1px black';
     cellToFill.style.borderRadius = '2px';
     cellToFill.addEventListener('mousedown', fillColorOnClick);
+    cellToFill.addEventListener('touchstart', fillColorOnClick);
     cellToFill.addEventListener('mouseenter', fillColorOnHover);
+    cellToFill.addEventListener('touchmove', fillColorOnHover);
     // cellToFill.addEventListener('mouseup', fillColorOnMouseUp);
   }
 
@@ -96,8 +99,11 @@ window.PixelPainter = function(height, width){
         var targetId = 'cell' + k + '-' + l;
         var targetEl = document.getElementById(targetId);
         targetEl.addEventListener('mousedown', fillColorOnClick);
+        targetEl.addEventListener('touchstart', fillColorOnClick);
         targetEl.addEventListener('mouseenter', fillColorOnHover);
+        targetEl.addEventListener('touchmove', fillColorOnHover);
         targetEl.addEventListener('mouseup', fillColorOnMouseUp);
+        targetEl.addEventListener('touchend', fillColorOnMouseUp);
         targetEl.dataset.y = k;
         targetEl.dataset.x = l;
       }
@@ -148,7 +154,7 @@ window.PixelPainter = function(height, width){
       for (var j = topY; j < 25; j++){
         currentCell = document.getElementById('cell' + j + '-' + topX);
         currentCell.style.backgroundColor = selectedColor;
-        
+
         leftNeighbor = document.getElementById('cell' + j + '-' + (Number(topX)-1));
         if (leftNeighbor.style.backgroundColor === colorToReplace){
           if (foundLeft === false){
@@ -238,7 +244,7 @@ window.PixelPainter = function(height, width){
       var topBorderCellId = 'titleCell' + 1 + '-' + i;
       var bottomBorderCellId = 'titleCell' + height + '-' + i;
       document.getElementById(topBorderCellId).style.backgroundColor = borderColor;
-      
+
       document.getElementById(topBorderCellId).style.height = borderHeight;
       document.getElementById(bottomBorderCellId).style.backgroundColor = borderColor;
       document.getElementById(bottomBorderCellId).style.height = borderHeight;
@@ -251,7 +257,7 @@ window.PixelPainter = function(height, width){
       var leftBorderCellId = 'titleCell' + j + '-' + 0;
       var rightBorderCellId = 'titleCell' + j + '-' + width;
       document.getElementById(leftBorderCellId).style.backgroundColor = borderColor;
-      
+
       document.getElementById(leftBorderCellId).style.width = borderWidth;
       document.getElementById(rightBorderCellId).style.backgroundColor = borderColor;
       document.getElementById(rightBorderCellId).style.width = borderWidth;
@@ -305,6 +311,10 @@ window.PixelPainter = function(height, width){
 
       case 'flower':
         createFlower(e);
+        break;
+
+      case 'heart':
+        createHeart(e);
         break;
 
       default:
@@ -409,7 +419,7 @@ window.PixelPainter = function(height, width){
 
   var buttonsLineTwo = document.createElement('div');
   toolBox.appendChild(buttonsLineTwo);
-  
+
   const brushButton = document.createElement('img');
   brushButton.src = 'paint_brush.png';
   brushButton.id = 'brush';
@@ -423,8 +433,9 @@ window.PixelPainter = function(height, width){
   // brushButton.appendChild(brushImg);
 
   const fillButton = document.createElement('img');
+  // fillButton.id = 'fill';
   fillButton.src = 'paint_bucket.png';
-  fillButton.id = 'fill';
+  fillButton.id = 'actualFill';
   fillButton.className = 'toolBoxButton';
   fillButton.addEventListener('click', selectTool);
   buttonsLineOne.appendChild(fillButton);
@@ -454,24 +465,30 @@ window.PixelPainter = function(height, width){
   buttonsLineTwo.appendChild(document.createElement('br'));
   clear.innerHTML="Start over";
 
-  const experimentalBtn = document.createElement('button');
-  experimentalBtn.id = 'actualFill';
+  const experimentalBtn = document.createElement('img');
+  // experimentalBtn.id = 'actualFill';
+  experimentalBtn.id = 'heart';
+  experimentalBtn.src = 'heart.svg';
   experimentalBtn.addEventListener("click", selectTool);
   experimentalBtn.className = 'toolBoxButton';
   buttonsLineTwo.appendChild(experimentalBtn);
-  experimentalBtn.innerHTML = 'F';
+  // experimentalBtn.innerHTML = 'F';
 
-  const flowerBtn = document.createElement('button');
+  const flowerBtn = document.createElement('img');
   flowerBtn.id = 'flower';
+  flowerBtn.src = 'flower2.svg';
   flowerBtn.addEventListener("click", selectTool);
   flowerBtn.className = 'toolBoxButton';
   buttonsLineTwo.appendChild(flowerBtn);
-  flowerBtn.innerHTML = '*';
+  // flowerBtn.innerHTML = '*';
 
   function selectTool(e){
     switch (e.target.id){
       case 'fill':
         toolPicked = 'fill';
+        break;
+      case 'heart':
+        toolPicked = 'heart';
         break;
       case 'brush':
         toolPicked = 'brush';
@@ -526,6 +543,34 @@ window.PixelPainter = function(height, width){
       }
     }
   }
+
+  function createHeart(e){
+    var heartColorArr = [
+      [false, true, true, false, true, true, false],
+      [true, true, true, true, true, true, true],
+      [true, true, true, true, true, true, true],
+      [false, true, true, true, true, true, false],
+      [false, false, true, true, true, false, false],
+      [false, false, false, true, false, false, false]
+    ];
+
+    var clickedCell = document.getElementById(e.target.id);
+    var startCellX = Number(clickedCell.dataset.x)-3;
+    var startCellY = Number(clickedCell.dataset.y)-2;
+    var startCell = document.getElementById('cell' + startCellY + '-' + startCellX);
+
+    var affectedCell;
+
+    for (var y = 0; y < 6; y++){
+      for (var x = 0; x < 7; x++){
+        affectedCell = document.getElementById('cell' + (Number(startCellY)+y) + '-' + ((Number(startCellX)+x)));
+        if(heartColorArr[y][x] === true){
+          affectedCell.style.backgroundColor = 'rgb(203, 74, 171)';
+        }
+      }
+    }
+  }
+
 };
 
 PixelPainter(25,52);
