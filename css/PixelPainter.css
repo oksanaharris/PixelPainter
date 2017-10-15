@@ -13,7 +13,6 @@ body {
   height: 100%;
   padding-top: 50px;
   box-sizing: border-box;
-
 }
 
 #titleContainerDiv{
@@ -187,6 +186,134 @@ body {
 /*.text{
   cursor: text;
 }*/
+
+.titleCellAn {
+  border: solid 1px black;
+  border-radius: 2px;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+.randomColor1{
+  background-color: '#6dc5fb';
+  animation-name: randomColorAnOne;
+  /*animation-duration: 2s;*/
+  /*animation-iteration-count: infinite;*/
+}
+
+.randomColor2{
+  animation-name: randomColorAnTwo;
+  background-color: #fa8072;
+/*  animation-duration: 1s;
+  animation-iteration-count: infinite;*/
+}
+
+.randomColor3{
+  animation-name: randomColorAnThree;
+  background-color: purple;
+/*  animation-duration: 1s;
+  animation-iteration-count: infinite;*/
+}
+
+.randomColor4{
+  animation-name: randomColorAnFour;
+  background-color: #cb4aab;
+/*  animation-duration: 1s;
+  animation-iteration-count: infinite;*/
+}
+
+.randomColor5{
+  animation-name: randomColorAnFive;
+  background-color: #62d9cf;
+/*  animation-duration: 1s;
+  animation-iteration-count: infinite;*/
+}
+
+@keyframes randomColorAnOne {
+  0% {
+    background-color: #6dc5fb; }
+  16% {
+    background-color: #e30c4d; }
+  32% {
+    background-color: #62d9cf; }
+  48% {
+    background-color: #cb4aab; }
+  64% {
+    background-color: purple; }
+  80% {
+    background-color: #fa8072; }
+  100% {
+    background-color: #6dc5fb; }
+}
+
+@keyframes randomColorAnTwo {
+  0% {
+    background-color: #fa8072; }
+  16% {
+    background-color: #6dc5fb; }
+  32% {
+    background-color: #e30c4d; }
+  48% {
+    background-color: #62d9cf; }
+  64% {
+    background-color: #cb4aab; }
+  80% {
+    background-color: purple; }
+  100% {
+    background-color: #fa8072; }
+}
+
+@keyframes randomColorAnThree {
+  0% {
+    background-color: purple; }
+  16% {
+    background-color: #fa8072; }
+  32% {
+    background-color: #6dc5fb; }
+  48% {
+    background-color: #e30c4d; }
+  64% {
+    background-color: #62d9cf; }
+  80% {
+    background-color: #cb4aab; }
+  100% {
+    background-color: purple; }
+}
+
+@keyframes randomColorAnFour {
+  0% {
+    background-color: #cb4aab; }
+  16% {
+    background-color: purple; }
+  32% {
+    background-color: #fa8072; }
+  48% {
+    background-color: #6dc5fb; }
+  64% {
+    background-color: #e30c4d; }
+  80% {
+    background-color: #62d9cf; }
+  100% {
+    background-color: #cb4aab; }
+}
+
+@keyframes randomColorAnFive {
+  0% {
+    background-color: #62d9cf; }
+  16% {
+    background-color: #cb4aab; }
+  32% {
+    background-color: purple; }
+  48% {
+    background-color: #fa8072; }
+  64% {
+    background-color: #6dc5fb; }
+  80% {
+    background-color: #e30c4d; }
+  100% {
+    background-color: #62d9cf; }
+}
+
 
 @media screen and (max-width: 1000px) {
   #titleContainerDiv {

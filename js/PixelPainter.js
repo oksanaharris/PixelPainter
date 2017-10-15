@@ -54,32 +54,68 @@ window.PixelPainter = function(height, width){
 
   var titleLetterArr = ["titleCell3-2", "titleCell4-2", "titleCell5-2", "titleCell6-2", "titleCell7-2", "titleCell3-3", "titleCell4-4", "titleCell5-3", "titleCell4-6", "titleCell3-6", "titleCell5-6", "titleCell6-6", "titleCell7-6", "titleCell3-8", "titleCell4-9", "titleCell5-10", "titleCell6-11", "titleCell7-12", "titleCell7-8", "titleCell6-9", "titleCell4-11", "titleCell3-12", "titleCell3-14", "titleCell4-14", "titleCell5-14", "titleCell6-14", "titleCell7-14", "titleCell7-15", "titleCell7-16", "titleCell5-15", "titleCell5-16", "titleCell3-15", "titleCell3-16", "titleCell3-18", "titleCell4-18", "titleCell5-18", "titleCell6-18", "titleCell7-18", "titleCell7-19", "titleCell7-20", "titleCell7-23", "titleCell6-23", "titleCell5-23", "titleCell4-23", "titleCell3-23", "titleCell3-24", "titleCell4-25", "titleCell5-24", "titleCell7-26", "titleCell6-27", "titleCell5-27", "titleCell4-28", "titleCell3-28", "titleCell5-29", "titleCell6-29", "titleCell7-30", "titleCell6-28", "titleCell3-32", "titleCell4-32", "titleCell5-32", "titleCell6-32", "titleCell7-32", "titleCell3-34", "titleCell4-34", "titleCell5-34", "titleCell6-34", "titleCell7-34", "titleCell5-35", "titleCell6-36", "titleCell7-37", "titleCell5-37", "titleCell4-37", "titleCell3-37", "titleCell3-39", "titleCell3-40", "titleCell3-41", "titleCell4-40", "titleCell5-40", "titleCell6-40", "titleCell7-40",  "titleCell7-43", "titleCell7-44", "titleCell7-45", "titleCell6-43", "titleCell5-43", "titleCell5-44", "titleCell5-45", "titleCell4-43", "titleCell3-43", "titleCell3-44", "titleCell3-45", "titleCell3-47", "titleCell4-47", "titleCell5-47", "titleCell6-47", "titleCell7-47", "titleCell6-49", "titleCell7-49", "titleCell5-48", "titleCell4-49", "titleCell3-48"];
 
+  console.log(titleLetterArr.length);
+
   var cellToFill;
 
   var randomColor;
 
   var titleColors = ['#6dc5fb','#e30c4d', '#62d9cf', '#cb4aab', 'purple', '#fa8072'];
 
-  for (var y = 0; y < titleLetterArr.length; y++){
-    randomColor = titleColors[(Math.floor(Math.random()*6))];
-    cellToFill = document.getElementById(titleLetterArr[y]);
-    cellToFill.style.backgroundColor = randomColor;
-    cellToFill.style.border = 'solid 1px black';
-    cellToFill.style.borderRadius = '2px';
-    cellToFill.addEventListener('mousedown', fillColorOnClick);
-    cellToFill.addEventListener('touchstart', fillColorOnClick);
-    cellToFill.addEventListener('mouseenter', fillColorOnHover);
-    cellToFill.addEventListener('touchmove', fillColorOnHover);
-    // cellToFill.addEventListener('mouseup', fillColorOnMouseUp);
+  // for (var y = 0; y < titleLetterArr.length; y++){
+  //   randomColor = titleColors[(Math.floor(Math.random()*6))];
+  //   cellToFill = document.getElementById(titleLetterArr[y]);
+  //   cellToFill.style.backgroundColor = randomColor;
+  //   cellToFill.style.border = 'solid 1px black';
+  //   cellToFill.style.borderRadius = '2px';
+  //   cellToFill.addEventListener('mousedown', fillColorOnClick);
+  //   cellToFill.addEventListener('touchstart', fillColorOnClick);
+  //   cellToFill.addEventListener('mouseenter', fillColorOnHover);
+  //   cellToFill.addEventListener('touchmove', fillColorOnHover);
+  //   // cellToFill.addEventListener('mouseup', fillColorOnMouseUp);
+  // }
+
+  var randomColorAnimationArr = ['randomColor1', 'randomColor2', 'randomColor3', 'randomColor4', 'randomColor5',
+  'randomColor1', 'randomColor2', 'randomColor3', 'randomColor4', 'randomColor5',
+  'randomColor1', 'randomColor2', 'randomColor3', 'randomColor4', 'randomColor5',
+  'randomColor1', 'randomColor2', 'randomColor3', 'randomColor4', 'randomColor5',
+  'randomColor1', 'randomColor2', 'randomColor3', 'randomColor4', 'randomColor5',
+  'randomColor1', 'randomColor2', 'randomColor3', 'randomColor4', 'randomColor5',
+  'randomColor1', 'randomColor2', 'randomColor3', 'randomColor4', 'randomColor5',
+  'randomColor1', 'randomColor2', 'randomColor3', 'randomColor4', 'randomColor5',
+  'randomColor1', 'randomColor2', 'randomColor3', 'randomColor4', 'randomColor5',
+  'randomColor1', 'randomColor2', 'randomColor3', 'randomColor4', 'randomColor5',
+  'randomColor1', 'randomColor2', 'randomColor3', 'randomColor4', 'randomColor5',
+  'randomColor1', 'randomColor2', 'randomColor3', 'randomColor4', 'randomColor5',
+  'randomColor1', 'randomColor2', 'randomColor3', 'randomColor4', 'randomColor5',
+  'randomColor1', 'randomColor2', 'randomColor3', 'randomColor4', 'randomColor5',
+  'randomColor1', 'randomColor2', 'randomColor3', 'randomColor4', 'randomColor5',
+  'randomColor1', 'randomColor2', 'randomColor3', 'randomColor4', 'randomColor5',
+  'randomColor1', 'randomColor2', 'randomColor3', 'randomColor4', 'randomColor5',
+  'randomColor1', 'randomColor2', 'randomColor3', 'randomColor4', 'randomColor5',
+  'randomColor1', 'randomColor2', 'randomColor3', 'randomColor4', 'randomColor5',
+  'randomColor1', 'randomColor2', 'randomColor3', 'randomColor4', 'randomColor5', 'randomColor1'];
+
+  var titleCellToColor;
+
+  for (var z = 0; z < titleLetterArr.length; z++){
+    titleCellToColor = document.getElementById(titleLetterArr[z]);
+    titleCellToColor.className = titleCellToColor.className + ' titleCellAn ' + randomColorAnimationArr[z];
+    // titleCellToColor.style.border = 'solid 1px black';
+    // titleCellToColor.style.borderRadius = '2px';
+    titleCellToColor.addEventListener('mousedown', fillColorOnClick);
+    titleCellToColor.addEventListener('touchstart', fillColorOnClick);
+    titleCellToColor.addEventListener('mouseenter', fillColorOnHover);
+    titleCellToColor.addEventListener('touchmove', fillColorOnHover);
   }
 
-  setInterval (function refreshTitleColors(){
-    for (var y = 0; y < titleLetterArr.length; y++){
-      randomColor = titleColors[(Math.floor(Math.random()*6))];
-      cellToFill = document.getElementById(titleLetterArr[y]);
-      cellToFill.style.backgroundColor = randomColor;
-    }
-  }, 100);
+  // setInterval (function refreshTitleColors(){
+  //   for (var y = 0; y < titleLetterArr.length; y++){
+  //     randomColor = titleColors[(Math.floor(Math.random()*6))];
+  //     cellToFill = document.getElementById(titleLetterArr[y]);
+  //     cellToFill.style.backgroundColor = randomColor;
+  //   }
+  // }, 100);
 
   function canvasGrid(gridHeight, gridWidth, classStr, parent){
     for(i=1; i<=gridHeight; i++){
